@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+:root {
+  --color-forest: #183c32;
+  --color-mountain: #3f6652;
+  --color-sage: #71816b;
+  --color-cream: #f5f1e7;
+  --color-mist: #faf9f5;
+  --color-sand: #d9c8ae;
+  --color-brown: #765c48;
+
+  --background: var(--color-cream);
+  --foreground: var(--color-forest);
+}
+
+@theme inline {
+  --color-forest: var(--color-forest);
+  --color-mountain: var(--color-mountain);
+  --color-sage: var(--color-sage);
+  --color-cream: var(--color-cream);
+  --color-mist: var(--color-mist);
+  --color-sand: var(--color-sand);
+  --color-brown: var(--color-brown);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --font-serif: "Fraunces Variable", Georgia, serif;
+  --font-sans: "Karla Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --animate-fade-up: fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  --animate-drift: drift 26s ease-in-out infinite;
+  --animate-drift-slow: drift 40s ease-in-out infinite reverse;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(3%);
+  }
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "Karla Variable", ui-sans-serif, system-ui, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+.font-serif-display {
+  font-family: "Fraunces Variable", Georgia, serif;
+  font-variation-settings: "opsz" 40, "SOFT" 60;
+  font-optical-sizing: none;
+}
+
+::selection {
+  background: var(--color-sand);
+  color: var(--color-forest);
+}
+
+/* Visible, on-brand focus states for accessibility */
+:focus-visible {
+  outline: 2px solid var(--color-forest);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Scroll-reveal starting state, toggled by the FadeUp client component */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+}
+.reveal.revealed {
+  animation: var(--animate-fade-up);
+}
+
+.scrollbar-none {
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
